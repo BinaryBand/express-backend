@@ -1,0 +1,56 @@
+import sqlite3, { Database, RunResult } from 'sqlite3';
+
+
+const DATABASE_NAME: string = 'data.db';
+export const USERS_TABLE_NAME: string = 'Users';
+
+export function run(db: Database, command: string): Promise<RunResult> {
+  return new Promise((resolve: (res: RunResult) => void, reject: (err: Error) => void): void => {
+    db.run(command, undefined, (res: RunResult, err: Error | null): void => {
+      if (err) {
+        reject(err);
+      }
+      else {
+        resolve(res);
+      }
+    });
+  });
+}
+
+export function fetch(db: Database, query: string, callback?: (row: unknown) => void): Promise<number> {
+  return new Promise((resolve: (count: number) => void, reject: (err: Error) => void): void => {
+    const iteration = (err: Error | null, row: unknown): void => {
+      if (err) {
+        reject(err);
+      }
+      else if (callback) {
+        callback(row);
+      }
+    };
+
+    db.each(query, iteration, (err: Error | null, count: number): void => {
+      if (err) {
+        reject(err);
+      }
+      else {
+        resolve(count);
+      }
+    });
+  });
+}
+
+const db: Database = new sqlite3.Database(DATABASE_NAME);
+
+// Create tables if they don't exist
+((): void => {
+  run(db, `CREATE TABLE ${USERS_TABLE_NAME} (
+    userId        varchar(255)  PRIMARY KEY,
+    emailHash     varchar(255)  NOT NULL,
+    passwordHash  varchar(255)  NOT NULL,
+    data          string        NOT NULL
+  );`);
+})();
+
+export function useDatabase(): Database {
+  return db;
+}

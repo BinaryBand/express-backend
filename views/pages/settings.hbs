@@ -1,0 +1,28 @@
+<h1 class="h3 fw-normal">Account Settings</h1>
+
+<form action="/" method="POST" id="{{id}}">
+  <a class="btn btn-secondary" href="/sign-out">Logout</a>
+</form>
+
+<hr>
+
+<h1 class="h3 fw-normal text-danger">Danger Zone</h1>
+
+<p class="text-muted">These actions requires additional authentication.</p>
+
+<form action="/delete-account" method="POST" id="{{id}}">
+  <input type="hidden" name="_csrf" value="{{csrf}}">
+
+  {{!-- Delete account button --}}
+  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Delete Account
+  </button>
+
+  {{!-- Modal --}}
+  {{#>/popup title="Confirm Password"}}
+    <p>This actions requires additional authentication. Please enter your current password to continue.</p>
+
+    {{!-- Password input --}}
+    {{>form/input type="password" key="password" placeholder="Current Password"}}
+  {{/popup}}
+</form>
