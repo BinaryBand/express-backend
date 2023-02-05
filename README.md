@@ -15,29 +15,29 @@ This project is a web application that allows users to create an account and aut
 
 1. Clone this repository to your local machine.
 ```bash
-    git clone https://github.com/BinaryBand/express-backend.git
+git clone https://github.com/BinaryBand/express-backend.git
 ```
 
 2. Navigate to the project directory.
 ```bash
-    cd express-backend
+cd express-backend
 ```
 
 3. Install the required dependencies.
 ```bash
-    npm install
+npm install
 ```
 
 4. Create a .env file in the project root and add the following environment variables:
 ```
-    ENCRYPTION_KEY=your_encryption_key
-    HASH_SALT=your_hash_salt
-    TOKEN_SECRET=your_token_secret
+ENCRYPTION_KEY=your_encryption_key
+HASH_SALT=your_hash_salt
+TOKEN_SECRET=your_token_secret
 ```
 
 5. Start the development server. The application will be available at http://localhost:3000.
 ```bash
-    npm start
+npm start
 ```
 
 ### Usage
