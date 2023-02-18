@@ -2,6 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import { sha256 } from '../../util/crypto';
 
 
+/**
+ * Attempt to return user's IP address.
+ * @returns IP address or undefined.
+ */
 function getIp(req: Request): string {
   return (
     req.header('x-forwarded-for') ||
@@ -11,6 +15,9 @@ function getIp(req: Request): string {
   );
 }
 
+/**
+ * Create and store a unique hash that identifies our user.
+ */
 export default (req: Request, _res: Response, next: NextFunction): void => {
   const info: string = [
     req.header('user-agent'),

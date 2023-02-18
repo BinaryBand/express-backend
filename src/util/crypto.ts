@@ -20,8 +20,7 @@ export function hmac256(key: string, msg: string): string {
 export function encrypt(msg: string): string {
   const iv: Buffer = crypto.randomBytes(16);
   const cipher: Cipher = crypto.createCipheriv('aes-256-cbc', ENCRYPTION_KEY, iv);
-  return Buffer.concat([
-    iv,
+  return Buffer.concat([iv,
     cipher.update(msg),
     cipher.final()
   ]).toString('base64');
