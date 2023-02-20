@@ -52,7 +52,7 @@ hbs.registerPartials(path.join(__dirname, 'views/partials'));
 import fingerprint from './services/middleware/fingerprint';
 app.use(fingerprint);
 
-// Delete user token if it's invalid or expired.
+// Revoke user token if it's invalid or expired.
 import authenticate from './services/middleware/authenticate';
 app.use(authenticate);
 

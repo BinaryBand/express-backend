@@ -1,4 +1,4 @@
-import { addUser, userExistsByEmail } from '../../database/users';
+import { addUserToDatabase, userExistsByEmail } from '../../database/users';
 import { Request, Response, NextFunction } from 'express';
 
 
@@ -19,6 +19,6 @@ export default async (req: Request, res: Response, next: NextFunction): Promise<
   }
 
   else {
-    addUser(name, email, password).then(next);
+    addUserToDatabase(name, email, password).then(next);
   }
 }
